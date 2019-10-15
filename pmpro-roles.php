@@ -70,7 +70,10 @@ class PMPRO_Roles {
 		$role_key = PMPRO_Roles::$role_key . $saveid;
 		//created a new level
 		if( $_REQUEST['edit'] < 0 ) {
-			add_role( $role_key, $_REQUEST['name'] );
+			add_role( $role_key, $_REQUEST['name'], array(
+				'read' => true,
+				// Various Capabilities
+			) );
 		}
 		//edited a level
 		else {
@@ -81,7 +84,10 @@ class PMPRO_Roles {
 			if(!is_array( $roles ) ) return;
 			//the role doesn't exist - create it, then we are done.
 			if(!isset( $roles[$role_key] ) ){
-				add_role( $role_key, $_REQUEST['name'] );
+				add_role( $role_key, $_REQUEST['name'], array(
+					'read' => true,
+					// Various Capabilities
+				) );
 				return;
 			}
 			$role = $roles[$role_key];
@@ -91,7 +97,10 @@ class PMPRO_Roles {
 				//delete the role (because update_role() doesn't exist...)
 				remove_role( $role_key );
 				//then recreate it
-				add_role( $role_key, $_REQUEST['name'] );
+				add_role( $role_key, $_REQUEST['name'], array(
+					'read' => true,
+					// Various Capabilities
+				) );
 			}
 		}
 	}
@@ -147,7 +156,10 @@ class PMPRO_Roles {
 			//the role doesn't exist for this level
 			if( !get_role( $role_key ) ) {
 				$i++;
-				add_role( $role_key, $level->name );
+				add_role( $role_key, $level->name, array(
+					'read' => true,
+					// Various Capabilities
+				) );
 			}
 		}
 		if( defined( 'DOING_AJAX' ) && DOING_AJAX ){
